@@ -43,29 +43,67 @@ class GestionBiblioteca:
 
         print("--Eliminar Libros--")
 
-        print("\n Desea eliminar por nombre o codigo?")
-        print("\n presione 1.por nombre")
-        print("\n presione 2.por codigo")
+        print("\n Desea eliminar por titulo o codigo?")
+        print("presione 1.por titulo")
+        print("presione 2.por codigo")
 
-        opcion = input("Eliga la Opcion: ")
+        opcion = input("\nEliga la Opcion: ")
 
         try:
             int(opcion)
 
+            match opcion:
+                case 1:
+                    print(" ")
+                    tituloDelete = input("Ingrese el nombre: ")
+                    for nom in self.biblioteca:
+                        if nom.titulo.lower() == tituloDelete.lower():
+                            self.biblioteca.remove(nom)
+                            print("Libro Eliminado Exitosamente...")
+                        else:
+                            print("Libro no encontrado...")
+
+                case 2:
+                    print(" ")
+                    codigoDelete = input("Ingrese el codigo: ")
+                    for cod in self.biblioteca:
+                        if cod.codig == codigoDelete:
+                            self.biblioteca.remove(cod)
+                            print("Libro Eliminado Exitosamente...")
+                        else:
+                            print("Libro no encontrado...")
+
+
         except ValueError:
             print("Error- tiene que elegir un opcion entre 1 y 2")
 
+gestion = GestionBiblioteca()
+
+while True:
+    print("--MENU BIBLIOTECA--")
+    print("1. Agregar Libro")
+    print("2. Mostrar Libros Ingresados")
+    print("3. Eliminar Libro")
+    print("4. Salir ")
+
+    try:
+        opcion = int(input("Ingrese la Opcion: "))
+        match opcion:
+            case 1:
+                gestion.agregar()
+            case 2:
+                gestion.mostrar()
+            case 3:
+                gestion.eliminar()
+            case 4:
+                print("Saliendo del Programa...")
+                break
+
+    except ValueError:
+        print("Error- ingrese un numero entero")
 
 
-        try:
-           buscarCodigo = int(input("Ingrese el codigo del libro que desea eliminar: "))
 
-           if buscarCodigo in self.biblioteca:
-               self.biblioteca.remove(buscarCodigo)
-               print("Eliminado Exitosamente...")
-
-        except ValueError:
-            print("Error- esta ingresando un codigo invalido")
 
 
 
